@@ -25,7 +25,7 @@ class StoreCooperadoRequest extends FormRequest {
             'nome' => ['required', 'string'],
             'cpf_cnpj' => [
                 'required',
-                Rule::unique('cooperados', 'cpf_cnpj')->ignore($this->route('cooperado'))
+                Rule::unique('cooperados', 'cpf_cnpj')
             ],
             'data_nascimento_constituicao' => ['required', 'date'],
             'renda_faturamento' => ['required', 'numeric'],
