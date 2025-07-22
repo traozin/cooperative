@@ -63,8 +63,9 @@ class Utils {
     }
 
     public function validarCpfCnpj(?string $documento): bool {
-        if (!$documento)
+        if (!$documento) {
             return false;
+        }
 
         $documento = preg_replace('/\D/', '', $documento);
 
