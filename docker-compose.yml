@@ -1,0 +1,50 @@
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: cooperative-api
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./api:/var/www/html
+    depends_on:
+      - mysql
+    networks:
+      - cooperative-net
+    environment:
+      - DB_HOST=mysql
+    command: php artisan serve --host=0.0.0.0 --port=8000
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: cooperative-web
+    ports:
+      - "3001:5173"
+    volumes:
+      - ./web:/app
+    working_dir: /app
+    command: npm run dev -- --host
+    networks:
+      - cooperative-net
+
+  mysql:
+    image: mysql:8
+    container_name: cooperative-mysql
+    ports:
+      - "3307:3307"
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cooperative
+    networks:
+      - cooperative-net
+
+volumes:
+  db-data:
+
+networks:
+  cooperative-net:
