@@ -49,4 +49,11 @@ class UpdateCooperadoRequest extends FormRequest {
             'email' => 'E-mail',
         ];
     }
+
+    public function messages(): array {
+        return [
+            'telefone.regex' => 'O campo Telefone deve ser um número válido, como (11) 99999-9999.',
+            'cpf_cnpj.unique' => 'Já existe um cooperado com este CPF/CNPJ cadastrado.',
+        ];
+    }
 }
