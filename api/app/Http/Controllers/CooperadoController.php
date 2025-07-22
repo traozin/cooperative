@@ -24,7 +24,10 @@ class CooperadoController extends Controller {
             $cooperado = $this->cooperadoService->create($request->validated());
             return response()->json($cooperado, 201);
         } catch (Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 422);
+            return response()->json([
+                'message' => "Erro ao criar cooperado",
+                "error" => $e->getMessage()
+            ], 422);
         }
     }
 
@@ -37,7 +40,10 @@ class CooperadoController extends Controller {
             $cooperado = $this->cooperadoService->update($cooperado, $request->validated());
             return response()->json($cooperado);
         } catch (Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 422);
+            return response()->json([
+                'message' => "Erro ao atualizar cooperado",
+                "error" => $e->getMessage()
+            ], 422);
         }
     }
 

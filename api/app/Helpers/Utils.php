@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 class Utils {
-    protected function validarCPF(string $cpf): bool {
+    private static function validarCPF(string $cpf): bool {
         $cpf = preg_replace('/\D/', '', $cpf);
 
         if (strlen($cpf) != 11 || preg_match('/(\d)\1{10}/', $cpf)) {
@@ -11,12 +11,13 @@ class Utils {
         }
 
         for ($t = 9; $t < 11; $t++) {
-            for ($d = 0, $c = 0; $c < $t; $c++) {
+            $d = 0;
+            for ($c = 0; $c < $t; $c++) {
                 $d += $cpf[$c] * (($t + 1) - $c);
             }
 
-            $d = ((10 * $d) % 11) % 10;
-            if ($cpf[$c] != $d) {
+            $digitoVerificador = ((10 * $d) % 11) % 10;
+            if ((int) $cpf[$t] !== $digitoVerificador) {
                 return false;
             }
         }
@@ -24,7 +25,7 @@ class Utils {
         return true;
     }
 
-    protected function validarCNPJ(string $cnpj): bool {
+    private static function validarCNPJ(string $cnpj): bool {
         $cnpj = preg_replace('/\D/', '', $cnpj);
 
         if (strlen($cnpj) != 14 || preg_match('/(\d)\1{13}/', $cnpj)) {
@@ -62,7 +63,7 @@ class Utils {
         return $resultado == $digitos[1];
     }
 
-    public function validarCpfCnpj(?string $documento): bool {
+    public static function validarCpfCnpj(?string $documento): bool {
         if (!$documento) {
             return false;
         }
@@ -70,11 +71,11 @@ class Utils {
         $documento = preg_replace('/\D/', '', $documento);
 
         if (strlen($documento) === 11) {
-            return $this->validarCPF($documento);
+            return self::validarCPF($documento);
         }
 
         if (strlen($documento) === 14) {
-            return $this->validarCNPJ($documento);
+            return self::validarCNPJ($documento);
         }
 
         return false;

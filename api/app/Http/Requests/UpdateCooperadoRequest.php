@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class UpdateCooperadoRequest extends FormRequest {
     /**
@@ -20,11 +21,12 @@ class UpdateCooperadoRequest extends FormRequest {
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array {
-        $id = $this->route('cooperado');
-
         return [
             'nome' => ['required', 'string'],
-            'cpf_cnpj' => ['required', 'string', "unique:cooperados,cpf_cnpj,{$id}"],
+            'cpf_cnpj' => [
+                'required',
+                Rule::unique('cooperados', 'cpf_cnpj')->ignore($this->route('cooperado'))
+            ],
             'data_nascimento_constituicao' => ['required', 'date'],
             'renda_faturamento' => ['required', 'numeric'],
             'telefone' => ['required', 'regex:/^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/'],

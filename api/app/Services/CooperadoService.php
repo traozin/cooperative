@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Cooperado;
 use Illuminate\Support\Facades\Log;
 use Exception;
+use App\Helpers\Utils;
 
 class CooperadoService {
     public function create(array $data): Cooperado {
