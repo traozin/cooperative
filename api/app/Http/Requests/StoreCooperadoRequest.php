@@ -36,4 +36,15 @@ class StoreCooperadoRequest extends FormRequest {
             'errors' => $validator->errors(),
         ], 422));
     }
+
+    public function attributes(): array {
+        return [
+            'nome' => 'Nome',
+            'cpf_cnpj' => 'CPF/CNPJ',
+            'data_nascimento_constituicao' => 'Data de nascimento ou constituição',
+            'renda_faturamento' => 'Renda ou faturamento',
+            'telefone' => 'Telefone',
+            'email' => 'E-mail',
+        ];
+    }
 }
