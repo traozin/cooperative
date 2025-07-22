@@ -25,7 +25,7 @@ class StoreCooperadoRequest extends FormRequest {
             'cpf_cnpj' => ['required', 'string', 'unique:cooperados,cpf_cnpj'],
             'data_nascimento_constituicao' => ['required', 'date'],
             'renda_faturamento' => ['required', 'numeric'],
-            'telefone' => ['required', 'string'],
+            'telefone' => ['required', 'regex:/^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/'],
             'email' => ['nullable', 'email'],
         ];
     }
