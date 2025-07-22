@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->string('nome');
             $table->string('cpf_cnpj')->unique();
             $table->date('data_nascimento_constituicao');
-            $table->float('renda_faturamento', 15);
+            $table->decimal('renda_faturamento', 15, 2);
             $table->string('telefone');
             $table->string('email')->nullable();
             $table->timestamps();
