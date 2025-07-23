@@ -34,6 +34,7 @@ Esse comando irá:
 * Executar as migrations e inicializar o servidor Laravel;
 
 > ⚠️ Use `--build` na primeira vez ou após alterações no Dockerfile.
+> 🐢 Se você estiver utilizando Windows com WSL, o script do entrypoint (especialmente do backend) pode levar mais tempo para ser executado.
 
 ### 🌐 Acessos locais
 
