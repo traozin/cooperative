@@ -62,16 +62,21 @@ export default function CooperadoFormModal({
     return value;
   };
 
-  const phoneMask = (value) =>
-    value
-      .replace(
-        /^(\d{2})(\d{2})(\d{4,5})(\d{4})$/,
-        (_, p1, p2, p3, p4) => `+${p1} (${p2}) ${p3}-${p4}`
-      )
-      .replace(
-        /^(\d{2})(\d{4,5})(\d{4})$/,
-        (_, p1, p2, p3) => `(${p1}) ${p2}-${p3}`
-      );
+    const phoneMask = (value) => {
+        const cleanedValue = value.replace(/\D/g, "");
+        if (/^(\d{2})(\d{2})(\d{4,5})(\d{4})$/.test(cleanedValue)) {
+            return cleanedValue.replace(
+                /^(\d{2})(\d{2})(\d{4,5})(\d{4})$/,
+                (_, p1, p2, p3, p4) => `+${p1} (${p2}) ${p3}-${p4}`
+            );
+        } else if (/^(\d{2})(\d{4,5})(\d{4})$/.test(cleanedValue)) {
+            return cleanedValue.replace(
+                /^(\d{2})(\d{4,5})(\d{4})$/,
+                (_, p1, p2, p3) => `(${p1}) ${p2}-${p3}`
+            );
+        }
+        return value;
+    };
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
