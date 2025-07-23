@@ -164,11 +164,14 @@ export default function HomePage() {
             ...row,
             cpf_cnpj: formatCpfCnpj(row.cpf_cnpj),
             telefone: formatTelefone(row.telefone),
-            onClick: () => console.log("Row clicked:", row),
           }))}
           columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5, 10]}
+          initialState={{
+            pagination: {
+              paginationModel: { pageSize: 10 },
+            },
+          }}
+          pageSizeOptions={[5, 10]}
           getRowId={(row) => row.id}
         />
       </div>
