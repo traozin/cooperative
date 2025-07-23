@@ -71,16 +71,20 @@ export default function HomePage() {
     }
   };
 
-  const formatCpfCnpj = (value) =>
-    value.replace(
+  const formatCpfCnpj = (value) => {
+    if (!value) return "";
+    return value.replace(
       value.length === 11
         ? /(\d{3})(\d{3})(\d{3})(\d{2})/
         : /(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,
       value.length === 11 ? "$1.$2.$3-$4" : "$1.$2.$3/$4-$5"
     );
+  };
 
-  const formatTelefone = (value) =>
-    value.replace(/(\d{2})(\d{4,5})(\d{4})/, "($1) $2-$3");
+  const formatTelefone = (value) => {
+    if (!value) return "";
+    return value.replace(/(\d{2})(\d{4,5})(\d{4})/, "($1) $2-$3");
+  };
 
   const columns = [
     { field: "nome", headerName: "Nome", flex: 1 },
@@ -125,8 +129,7 @@ export default function HomePage() {
             color="error"
             size="small"
             onClick={() => handleRemove(row.id)}
-            style={{ marginRight: 8 }}
-            >
+            style={{ marginRight: 8 }}>
             <Delete />
           </Button>
           <Button
