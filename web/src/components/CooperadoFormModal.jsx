@@ -62,16 +62,19 @@ export default function CooperadoFormModal({
     return value;
   };
 
+    const INTERNATIONAL_PHONE_REGEX = /^(\d{2})(\d{2})(\d{4,5})(\d{4})$/;
+    const LOCAL_PHONE_REGEX = /^(\d{2})(\d{4,5})(\d{4})$/;
+
     const phoneMask = (value) => {
         const cleanedValue = value.replace(/\D/g, "");
-        if (/^(\d{2})(\d{2})(\d{4,5})(\d{4})$/.test(cleanedValue)) {
+        if (INTERNATIONAL_PHONE_REGEX.test(cleanedValue)) {
             return cleanedValue.replace(
-                /^(\d{2})(\d{2})(\d{4,5})(\d{4})$/,
+                INTERNATIONAL_PHONE_REGEX,
                 (_, p1, p2, p3, p4) => `+${p1} (${p2}) ${p3}-${p4}`
             );
-        } else if (/^(\d{2})(\d{4,5})(\d{4})$/.test(cleanedValue)) {
+        } else if (LOCAL_PHONE_REGEX.test(cleanedValue)) {
             return cleanedValue.replace(
-                /^(\d{2})(\d{4,5})(\d{4})$/,
+                LOCAL_PHONE_REGEX,
                 (_, p1, p2, p3) => `(${p1}) ${p2}-${p3}`
             );
         }
