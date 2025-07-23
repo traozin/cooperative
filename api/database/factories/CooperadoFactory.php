@@ -19,7 +19,7 @@ class CooperadoFactory extends Factory {
             'cpf_cnpj' => $this->faker->unique()->numerify('###########'), // ou cnpj
             'data_nascimento_constituicao' => $this->faker->date(),
             'renda_faturamento' => $this->faker->randomFloat(2, 1000, 100000),
-            'telefone' => $this->faker->phoneNumber(),
+            'telefone' => $this->faker->numerify('(##) #####-####'),
             'email' => $this->faker->safeEmail(),
         ];
     }
