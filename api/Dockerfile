@@ -8,7 +8,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     curl \
     git \
-    netcat-openbsd \ 
+    netcat-openbsd \
+    dos2unix \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd dom
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -20,6 +21,6 @@ COPY . .
 EXPOSE 8001
 
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN dos2unix /entrypoint.sh && chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]

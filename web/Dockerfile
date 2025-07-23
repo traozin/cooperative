@@ -10,6 +10,7 @@ COPY . .
 EXPOSE 3001
 
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN apt-get update && apt-get install -y dos2unix && \
+    dos2unix /entrypoint.sh && chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
