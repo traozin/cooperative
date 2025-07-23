@@ -14,6 +14,7 @@ services:
       - cooperative-net
     environment:
       - DB_HOST=mysql
+      - RUN_TESTS=true
     command: php artisan serve --host=0.0.0.0 --port=8000
 
   web:

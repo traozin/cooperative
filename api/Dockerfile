@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     git \
     netcat-openbsd \ 
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd dom
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 

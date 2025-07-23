@@ -18,4 +18,9 @@ php artisan db:seed
 
 chmod -R 775 storage bootstrap/cache
 
+if [ "$RUN_TESTS" = "true" ]; then
+  echo "🔎 Executando testes com PHPUnit..."
+  php artisan test --verbose
+fi
+
 exec "$@"
